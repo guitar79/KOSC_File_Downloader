@@ -1,3 +1,29 @@
+'''
+http://222.236.46.45/nfsdb/MODISA/2019/06/26/L2/MYDOCX.2019.0626.1621.aqua-1.hdf.zip
+http://222.236.46.45/nfsdb/MODIST/2019/06/29/L2/MODOCX.2019.0629.0003.terra-1.hdf.zip
+http://222.236.46.45/nfsdb/NOAA/2011/10/10/L2/2011.1010.1924.noaa-18.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2011/12/06/L2/2011.1206.0505.noaa-18.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2012/03/15/L2/2012.0315.0524.noaa-18.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2012/06/08/L2/2012.0608.2341.noaa-16.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2012/07/09/L2/2012.0709.0440.noaa-19.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2012/08/10/L2/2012.0810.1807.noaa-19.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2012/08/25/L2/2012.0825.2308.noaa-16.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2013/03/10/L2/2013.0310.1712.noaa-19.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2013/05/10/L2/2013.0510.0536.noaa-19.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2014/10/12/L2/2014.1012.1924.noaa-18.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2015/08/22/L2/2015.0822.0907.noaa-18.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2016/02/11/L2/2016.0211.0743.noaa-18.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2016/03/10/L2/2016.0310.0722.noaa-18.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2017/04/08/L2/2017.0408.1853.noaa-19.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2017/04/08/L2/2017.0408.2225.noaa-18.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2017/04/09/L2/2017.0409.2214.noaa-18.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2017/07/26/L2/2017.0726.1042.noaa-18.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2018/12/09/L2/2018.1209.1218.noaa-18.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2019/03/13/L2/2019.0313.2308.noaa-18.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2019/04/02/L2/2019.0402.1012.noaa-18.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2019/04/09/L2/2019.0409.1211.noaa-18.sst.asc.zip
+http://222.236.46.45/nfsdb/NOAA/2019/05/09/L2/2019.0509.2345.noaa-18.sst.asc.zip
+'''
 import urllib.request as urllib
 import time
 #threading library
@@ -77,7 +103,7 @@ class crawler_month(threading.Thread):
         self.month = month
         self.threadno = threadno
         self.moids_data_el = moids_data_el
-        sys.stderr.write('Thread #{0:d} started...\n'.format(self.threadnoself.moids_data_el))
+        sys.stderr.write('Thread #{0:d} started...\n'.format(self.threadno, self.moids_data_el))
 
     def run(self):
         for Da in range(1, 32):
@@ -106,9 +132,9 @@ moids_data_els = [('MODISA/', 'L2/', 'MYDOCT', 'aqua-1.hdf.zip', 'SST', 'MODIS')
                   ('NOAA/', 'L2/', '', 'noaa-18.sst.asc.zip', 'SST', 'NOAA'),
                   ('NOAA/', 'L2/', '', 'noaa-19.sst.asc.zip', 'SST', 'NOAA')]
 
-for Yr in range(2011,2019):
+for Yr in range(2011,2020):
     for Mo in range(1,13):
-        for moids_data_el in moids_data_els[0:4]:
+        for moids_data_el in moids_data_els:
             cmonth = crawler_month(Yr, Mo, threadno, moids_data_el)
             cmonth.start()
             threadno += 1
